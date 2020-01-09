@@ -20,25 +20,25 @@ library(mvtnorm)
 ####################################################################
 ### Souce Functions
 ####################################################################
-source('/Users/joshuanorth/Dropbox/Nowcasting/FDAWLM_USE_THIS_ONE/Final/Load_netCDF_Data.R', chdir = TRUE)
-source('/Users/joshuanorth/Dropbox/Nowcasting/FDAWLM_USE_THIS_ONE/Final/Nowcasting_Function.R', chdir = TRUE)
-source('/Users/joshuanorth/Dropbox/Nowcasting/FDAWLM_USE_THIS_ONE/Final/Finite_Difference_Function.R', chdir = TRUE)
-source('/Users/joshuanorth/Dropbox/Nowcasting/FDAWLM_USE_THIS_ONE/Final/Move_Functions.R', chdir = TRUE)
-source('/Users/joshuanorth/Dropbox/Nowcasting/FDAWLM_USE_THIS_ONE/Final/Error_Function.R', chdir = TRUE)
-source('/Users/joshuanorth/Dropbox/Nowcasting/FDAWLM_USE_THIS_ONE/Final/Prediction_Functions.R', chdir = TRUE)
+source('R/Load_netCDF_Data.R', chdir = TRUE)
+source('R/Nowcasting_Function.R', chdir = TRUE)
+source('R/Finite_Difference_Function.R', chdir = TRUE)
+source('R/Move_Functions.R', chdir = TRUE)
+source('R/Error_Function.R', chdir = TRUE)
+source('R/Prediction_Functions.R', chdir = TRUE)
 
 
 ####################################################################
 ### Compile Data
 ####################################################################
 
-bigD <- load.netCDF.data(filepath = '~/Dropbox/Nowcasting/FDAWLM_USE_THIS_ONE/Final/lightning_data')
+bigD <- load.netCDF.data(filepath = 'data')
 
-run <- read.csv('~/Dropbox/Nowcasting/FDAWLM_USE_THIS_ONE/Final/Movement_Data.csv') # mac
+run <- read.csv('movement_data/Movement_Data.csv')
 run <- run[,2:5] # drop first column
 
-move.perc <- read.csv('~/Dropbox/Nowcasting/FDAWLM_USE_THIS_ONE/Final/data/predict_data.csv', header = TRUE)
-col.prec <- read.csv('~/Dropbox/Nowcasting/FDAWLM_USE_THIS_ONE/Final/data/column_predict.csv', header = TRUE)
+move.perc <- read.csv('movement_data/predict_data.csv', header = TRUE)
+col.prec <- read.csv('movement_data/column_predict.csv', header = TRUE)
 
 
 
