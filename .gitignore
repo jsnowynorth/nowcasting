@@ -40,4 +40,4 @@ vignettes/*.pdf
 .Rproj.user
 
 # net cdf files
-.mdv.nc
+*.mdv.nc
