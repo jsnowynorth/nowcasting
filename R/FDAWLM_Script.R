@@ -160,9 +160,10 @@ for(i in 21:22){
 }
 
 
-####################################################################
-### Improvement against persistance
-####################################################################
+
+# Improvement against persistance -----------------------------------------
+
+
 
 system.time(trial <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, number = 10, timestep = 10, num = 10, deltaT = .000001, deltaX = .0025, nframes = 20))
 
@@ -176,9 +177,9 @@ for(i in 1 : 10){
 comp
 
 
-####################################################################
-### Rolling Window
-####################################################################
+# Rolling Window ----------------------------------------------------------
+
+
 # timestep = n (start nowcast from)
 # start = n (just a counter)
 # write.csv(comp, file = "start_n", row.names = FALSE)
@@ -214,9 +215,8 @@ image.plot(bigD[,,24])
 image.plot(samps[,,1])
 image.plot(bigD[,,33])
 image.plot(samps[,,10])
-####################################################################
-### Run tests
-####################################################################
+
+# Run tests ---------------------------------------------------------------
 
 smpl1 <- move.all(obs1 = bigD[,,30], obs2 = bigD[,,31], tolerance = 0, iteration = 10, number = 10)
 smpl2 <- finiteD(deltaT = .000001, deltaX = .0025, uInit = smpl1$obs1, nframes = 20)
@@ -264,10 +264,8 @@ ERROR(smpl6,bigD[,,61])
 ERROR(bigD[,,60],bigD[,,61])
 
 
-####################################################################
-### Titillate Q
-####################################################################
 
+# Experiment with Q -------------------------------------------------------
 
 Q <- matrix(c(0), nc = 400, nr = 400)
 t_a <- move.all(obs1 = bigD[,,60], obs2 = bigD[,,61], tolerance = 0, iteration = 10, number = 10)
@@ -380,9 +378,8 @@ image.plot(t7, main = "Q = bigD[,,61] - bigD[,,60]")
 image.plot(abs(t - bigD[,,61]), main = "No Q Error Forecast")
 image.plot(abs(t7 - bigD[,,61]), main = "(bigD[,,61] - bigD[,,60])/1000 Error Forecast")
 
-##########################################################################
-### Error Table, Q matrix comparison
-##########################################################################
+
+# Error Table, Q matrix comparison ----------------------------------------
 
 ###### Q non-zero
 
@@ -446,9 +443,8 @@ image.plot(Q)
 
  
  
-##########################################################################
-### Some Plots
-##########################################################################
+
+# Some Plots --------------------------------------------------------------
 
 
 png("one.png", height = 400, width = 400) 
@@ -463,9 +459,9 @@ image.plot(bigD[,,70], main = "Timestep 70", labels = F, tick = F)
 dev.off()
  
  
-##########################################################################
-### Plots of the percent change data
-##########################################################################
+
+#  Plots of the percent change data ---------------------------------------
+
 files = list.files('/Users/joshuanorth/Dropbox/Nowcasting/Nowcasting/data/Qpositive', pattern = '*.csv',full.names = T)
 Qpos = matrix(nrow = 56, ncol = 10)
 for(i in 1: length(files)){
@@ -517,9 +513,9 @@ abline(lm(run$Vertical ~ run$order))
 dev.off()
 
 
-##########################################################################
-### Normal Q data
-##########################################################################
+
+# Normal Q data -----------------------------------------------------------
+
 par(mfrow = c(1,1))
 
 png("Q_1000.png", height = 500, width = 1000)
@@ -572,10 +568,9 @@ legend("bottomright", title="Type of Q Used",
 dev.off()
 
 
-##########################################################################
-### Staggered plot of nowcast to actual for timesteps 51-54
-##########################################################################
-  
+
+# Staggered plot of nowcast to actual for timesteps 51-54 -----------------
+
   # Initialize the begin timestep
   begin = 50
   # Create Q matrix and run the nowcast on begin timestep i
@@ -744,10 +739,6 @@ dev.off()
 
 
 # Error analysis ----------------------------------------------------------
----------------------------------------------------------------------------
----------------------------------------------------------------------------
----------------------------------------------------------------------------
----------------------------------------------------------------------------
 
 # write smoothed images to file
 for(i in 3:68){

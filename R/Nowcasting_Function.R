@@ -15,10 +15,8 @@
 ## deltaT/deltaX needs to be less than 1/2 in 1D and 1/4 in 2D
 ## uInit is the last timestep of your data set, or the point you wish to predict from
 
-####################################################################
-### Nowcasting Function
-####################################################################
 
+# Nowcasting Function -----------------------------------------------------
 nowcast <- function(bigD = bigD, tolerance = 0, iteration = 10, number = 10,
                     timestep = timestep, num = 10, r = 0.2375, deltaT = .000001,
                     deltaX = .0025, nframes = 20, Q){
@@ -44,8 +42,11 @@ nowcast <- function(bigD = bigD, tolerance = 0, iteration = 10, number = 10,
 		prev <- smpl2
 
 	} # end for
+	
+	field <- ifelse(store < 0.0, 0, store)
+	field <- ifelse(field > 1.6, 1.6, field)
 
-	return(store = store)
+	return(store = field)
 
 } # end nowcast
 

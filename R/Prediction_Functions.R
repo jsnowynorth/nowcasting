@@ -17,16 +17,13 @@
 # timestep is the timepoint where your last image is, so if you choose timestep = 50 it means you will go up to bigD[,,50] then predict your images from there
 # step is how many steps in the future you want to go, if step = 10 and timestep = 50 you will predict to the 60th timestep, or 10 x time increment between images
 
-################################################################
-### Prediction Functions
-################################################################
 
 # Prediction function based off of a regression
 predict.regression <- function(bigD = bigD, tolerance = 0, iteration = 10, number = 10, 
                                timestep = timestep, prev = prev, step = 10, run = run){
 
 	# run <- points.move.partial(bigD = bigD, tolerance = 0, iteration = 10, number = 10, timestep = timestep)
-	run <- run[(1:timestep),] 
+	run <- run[(1:timestep),]
 	a <- run[,1] # horizontal movement
 	b <- run[,2] # vertical movement
 	c <- run[,3] # error

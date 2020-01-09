@@ -10,10 +10,7 @@
 # nframes is how many times the finite difference smooth is applied, see for loop
 # Q is a smoothing matrix
 
-################################################################
-### Finite Difference Function
-################################################################
-
+# Finite Difference Function ----------------------------------------------
 
 finiteD <- function(r = 0.2375, deltaT = .000001, deltaX = .0025, uInit = uInit, nframes = 20, Q){
 #finiteD <- function(r = 0.0004, uInit = uInit, nframes = 20, Q){
