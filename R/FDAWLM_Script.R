@@ -576,7 +576,7 @@ dev.off()
   # Create Q matrix and run the nowcast on begin timestep i
   Q <- bigD[,,begin] - bigD[,,(begin-1)]
   Q <- Q/200
-  samps1 <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, number = 10, timestep = begin, num = 10, deltaT = .000001, deltaX = .0025, nframes = 20) 
+  samps1 <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, number = 10, timestep = begin, num = 10, deltaT = .000001, deltaX = .0025, nframes = 20, Q = Q) 
 
   start_50 = samps1
   
@@ -584,7 +584,7 @@ dev.off()
   # Create Q matrix and run the nowcast on begin timestep i
   Q <- bigD[,,begin] - bigD[,,(begin-1)]
   Q <- Q/200
-  samps2 <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, number = 10, timestep = begin, num = 10, deltaT = .000001, deltaX = .0025, nframes = 20) 
+  samps2 <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, number = 10, timestep = begin, num = 10, deltaT = .000001, deltaX = .0025, nframes = 20, Q = Q) 
   
   start_51 = samps2
   
@@ -592,7 +592,7 @@ dev.off()
   # Create Q matrix and run the nowcast on begin timestep i
   Q <- bigD[,,begin] - bigD[,,(begin-1)]
   Q <- Q/200
-  samps3 <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, number = 10, timestep = begin, num = 10, deltaT = .000001, deltaX = .0025, nframes = 20) 
+  samps3 <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, number = 10, timestep = begin, num = 10, deltaT = .000001, deltaX = .0025, nframes = 20, Q = Q) 
   
   start_52 = samps3
   
@@ -600,7 +600,7 @@ dev.off()
   # Create Q matrix and run the nowcast on begin timestep i
   Q <- bigD[,,begin] - bigD[,,(begin-1)]
   Q <- Q/200
-  samps4 <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, number = 10, timestep = begin, num = 10, deltaT = .000001, deltaX = .0025, nframes = 20) 
+  samps4 <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, number = 10, timestep = begin, num = 10, deltaT = .000001, deltaX = .0025, nframes = 20, Q = Q) 
   
   start_53 = samps4
   
@@ -687,10 +687,94 @@ dev.off()
 # image(start_53[,,7], axes = F, col = tim.colors(256), zlim = c(-1,2))
 # 
 # dev.off()
+  
+png("/Users/joshuanorth/Desktop/staggered.png", height = 2500, width = 2500)
+par(oma=c(6,6,6,6)) # margin of 4 spaces width at right hand side
+set.panel(5,6) # 2X2 matrix of plots
+
+# first row
+image(bigD[,,51], ylab = "51", main = "Observed Weather", axes = F, cex.lab = 4, cex.main = 5, zlim = c(0,2), col = tim.colors(256))
+image(start_50[,,1], main = "Project 51-55", axes = F, cex.main = 5, zlim = c(0,2), col = tim.colors(256))
+plot.new()
+plot.new()
+plot.new()
+plot.new()
+# second row
+image(bigD[,,52], ylab = "52", axes = F, cex.lab = 4, zlim = c(0,2), col = tim.colors(256))
+image(start_50[,,2], axes = F, zlim = c(0,2), col = tim.colors(256))
+image(start_51[,,1], main = "Project 52-55", axes = F, cex.main = 5, zlim = c(0,2), col = tim.colors(256))
+plot.new()
+plot.new()
+plot.new()
+# third row
+image(bigD[,,53], ylab = "53", axes = F, cex.lab = 4, zlim = c(0,2), col = tim.colors(256))
+image(start_50[,,3], axes = F, zlim = c(0,2), col = tim.colors(256))
+image(start_52[,,2], axes = F, zlim = c(0,2), col = tim.colors(256))
+image(start_52[,,1], main = "Project 53-54", cex.main = 5, axes = F, zlim = c(0,2), col = tim.colors(256))
+plot.new()
+image.plot(legend.only=TRUE, zlim=c(0,2)) 
+# fourth row
+image(bigD[,,54], ylab = "54", axes = F, cex.lab = 4, zlim = c(0,2), col = tim.colors(256))
+image(start_50[,,4], axes = F, zlim = c(0,2), col = tim.colors(256))
+image(start_51[,,3], axes = F, zlim = c(0,2), col = tim.colors(256))
+image(start_52[,,2], axes = F, zlim = c(0,2), col = tim.colors(256))
+image(start_53[,,1], main = "Project 54-55", axes = F, cex.main = 5, zlim = c(0,2), col = tim.colors(256))
+plot.new()
+# fifth row
+image(bigD[,,55], ylab = "55", axes = F, cex.lab = 4, zlim = c(0,2), col = tim.colors(256))
+image(start_50[,,5], axes = F, zlim = c(0,2), col = tim.colors(256))
+image(start_51[,,4], axes = F, zlim = c(0,2), col = tim.colors(256))
+image(start_52[,,3], axes = F, zlim = c(0,2), col = tim.colors(256))
+image(start_53[,,2], axes = F, zlim = c(0,2), col = tim.colors(256))
+plot.new()
+
+dev.off()
+
+# image.plot tricked into  plotting in margin of old setting 
+
+set.panel() # reset plotting device
+  
+  
+png("/Users/joshuanorth/Desktop/staggered.png", height = 2500, width = 2500)
+
+par(mfrow = c(5,5))
+par(mar = c(6,6,6,6))
+# first row
+image.plot(bigD[,,51], ylab = "51", main = "Observed Weather", axes = F, cex.lab = 4, cex.main = 5, zlim = c(0,2))
+image.plot(start_50[,,1], main = "Project 51-55", axes = F, cex.main = 5, zlim = c(0,2))
+plot.new()
+plot.new()
+plot.new()
+# second row
+image.plot(bigD[,,52], ylab = "52", axes = F, cex.lab = 4, zlim = c(0,2))
+image.plot(start_50[,,2], axes = F, zlim = c(0,2))
+image.plot(start_51[,,1], main = "Project 52-55", axes = F, cex.main = 5,zlim = c(0,2))
+plot.new()
+plot.new()
+# third row
+image.plot(bigD[,,53], ylab = "53", axes = F, cex.lab = 4, zlim = c(0,2))
+image.plot(start_50[,,3], axes = F, zlim = c(0,2))
+image.plot(start_52[,,2], axes = F, zlim = c(0,2))
+image.plot(start_52[,,1], main = "Project 53-54", cex.main = 5, axes = F, zlim = c(0,2))
+plot.new()
+# fourth row
+image.plot(bigD[,,54], ylab = "54", axes = F, cex.lab = 4, zlim = c(0,2))
+image.plot(start_50[,,4], axes = F, zlim = c(0,2))
+image.plot(start_51[,,3], axes = F, zlim = c(0,2))
+image.plot(start_52[,,2], axes = F, zlim = c(0,2))
+image.plot(start_53[,,1], main = "Project 54-55", axes = F, cex.main = 5, zlim = c(0,2))
+# fifth row
+image.plot(bigD[,,55], ylab = "55", axes = F, cex.lab = 4, zlim = c(0,2))
+image.plot(start_50[,,5], axes = F, zlim = c(0,2))
+image.plot(start_51[,,4], axes = F, zlim = c(0,2))
+image.plot(start_52[,,3], axes = F, zlim = c(0,2))
+image.plot(start_53[,,2], axes = F, zlim = c(0,2))
+dev.off()
 
 # five by five staggered plot  
 
-png("staggered", height = 2500, width = 2500)
+# png("staggered", height = 2500, width = 2500)
+png("/Users/joshuanorth/Desktop/staggered.png", height = 2500, width = 2500)
   
 par(mfrow = c(5,5))
 par(mar = c(6,6,6,6))
