@@ -31,6 +31,8 @@ predict.regression <- function(bigD = bigD, tolerance = 0, iteration = 10, numbe
 
 	hor <- lm(a~d)
 	ver <- lm(b~d)
+	
+	# mod <- lm(cbind(Horizontal, Vertical) ~ order, data = run)
 
 	if(is.matrix(prev) == TRUE){
 		curr <- prev
@@ -46,7 +48,11 @@ predict.regression <- function(bigD = bigD, tolerance = 0, iteration = 10, numbe
 
 	store <- array(NA, dim=c(400,400,step))
 	
-	for ( k in 1:step){
+	for (k in 1:step){
+	  
+	  # preds <- predict(mod, newdata = data.frame(order = (timestep+k)))
+	  # horizontal = preds[,1]
+	  # vertical = preds[,2]
 	  
 	  horizontal = predict(hor, newdata = data.frame(d = (timestep+k)))
 	  vertical = predict(ver, newdata = data.frame(d = (timestep+k)))

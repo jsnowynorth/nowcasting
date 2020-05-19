@@ -52,24 +52,32 @@ col.prec <- read.csv('movement_data/column_predict.csv', header = TRUE)
 # plots -------------------------------------------------------------------
 
 # Initialize the begin timestep
-begin = 50
+# begin = 50
 # With Q
-q <- bigD[,,begin] - bigD[,,(begin-1)]
-q <- q/100
+begin = 50
+Q0 <- array(0, dim = dim(bigD[,,begin]))
+proj <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, number = 10,
+                timestep = (begin - 1), num = 1, r = 0.15, nframes = 5, Q = Q0)
+
+# q <- (bigD[,,begin] - bigD[,,(begin-1)])/150
+q <- (bigD[,,begin] - proj[,,1])/50
 wQ <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, 
-                  number = 10, timestep = begin, num = 10, 
-                  nframes = 20, Q = q, r = 0.15)
-wQ <- ifelse(wQ < 0.0, 0, wQ)
-wQ <- ifelse(wQ > 1.6, 1.6, wQ)
+              number = 10, timestep = begin, num = 10, 
+              nframes = 20, Q = q, r = 0.15)
+# 
+# q <- (bigD[,,begin] - proj[,,1])/50
+# # q <- bigD[,,begin] - bigD[,,(begin-1)]
+# # q <- q/100
+# wQ <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, 
+#                   number = 10, timestep = begin, num = 10, 
+#                   nframes = 20, Q = q, r = 0.15)
 
 
 # Without Q
-q <- matrix(rep(0, 160000), ncol = 400, nrow = 400)
+Q0 <- array(0, dim = dim(bigD[,,begin]))
 nQ <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, 
               number = 10, timestep = begin, num = 10, 
-              nframes = 20, Q = q, r = 0.15)
-nQ <- ifelse(nQ < 0.01, 0, nQ)
-nQ <- ifelse(nQ > 1.6, 1.6, nQ)
+              nframes = 20, Q = Q0, r = 0.15)
 
 
 
@@ -93,14 +101,14 @@ par(mar = c(6,8,6,6),
 image(bigD[,,51], ylab = "51", main = "Actual", axes = F, col = tim.colors(256), cex.lab = 5, cex.main = 5, zlim = c(0, 1.6), font.lab = 2)
 image(wQ[,,1], main = "Projection with Q", axes = F, col = tim.colors(256), cex.main = 5, zlim = c(0, 1.6))
 image(nQ[,,1], main = "Projection without Q", axes = F, col = tim.colors(256), cex.main = 5, zlim = c(0, 1.6))
-image(wQ[,,1] - nQ[,,1], main = "Difference", axes = F, col = two.colors(start = 'blue', middle = mid_col), cex.main = 5, zlim = c(-1,1))
+image(wQ[,,1] - nQ[,,1], main = "Difference", axes = F, col = two.colors(start = 'blue', middle = mid_col), cex.main = 5, zlim = c(-1.4,1.4))
 
 # second row
 image(bigD[,,52], ylab = "52", axes = F, col = tim.colors(256),
       cex.lab = 5, cex.main = 5, zlim = c(0, 1.6), font.lab = 2)
 image(wQ[,,2], axes = F, col = tim.colors(256), zlim = c(0, 1.6))
 image(nQ[,,2], axes = F, col = tim.colors(256), zlim = c(0, 1.6))
-image(wQ[,,2] - nQ[,,2], axes = F, col = two.colors(start = 'blue', middle = mid_col), zlim = c(-1,1))
+image(wQ[,,2] - nQ[,,2], axes = F, col = two.colors(start = 'blue', middle = mid_col), zlim = c(-1.4,1.4))
 
 
 # third row
@@ -108,28 +116,28 @@ image(bigD[,,53], ylab = "53", axes = F, col = tim.colors(256),
       cex.lab = 5, cex.main = 5, zlim = c(0, 1.6), font.lab = 2)
 image(wQ[,,3], axes = F, col = tim.colors(256), zlim = c(0, 1.6))
 image(nQ[,,3], axes = F, col = tim.colors(256), zlim = c(0, 1.6))
-image(wQ[,,3] - nQ[,,3], axes = F, col = two.colors(start = 'blue', middle = mid_col), zlim = c(-1,1))
+image(wQ[,,3] - nQ[,,3], axes = F, col = two.colors(start = 'blue', middle = mid_col), zlim = c(-1.4,1.4))
 
 # fourth row
 image(bigD[,,54], ylab = "54", axes = F, col = tim.colors(256),
       cex.lab = 5, cex.main = 5, zlim = c(0, 1.6), font.lab = 2)
 image(wQ[,,4], axes = F, col = tim.colors(256), zlim = c(0, 1.6))
 image(nQ[,,4], axes = F, col = tim.colors(256), zlim = c(0, 1.6))
-image(wQ[,,4] - nQ[,,4], axes = F, col = two.colors(start = 'blue', middle = mid_col), zlim = c(-1,1))
+image(wQ[,,4] - nQ[,,4], axes = F, col = two.colors(start = 'blue', middle = mid_col), zlim = c(-1.4,1.4))
 
 # fifth row
 image(bigD[,,55], ylab = "55", axes = F, col = tim.colors(256),
       cex.lab = 5, cex.main = 5, zlim = c(0, 1.6), font.lab = 2)
 image(wQ[,,5], axes = F, col = tim.colors(256), zlim = c(0, 1.6))
 image(nQ[,,5], axes = F, col = tim.colors(256), zlim = c(0, 1.6))
-image(wQ[,,5] - nQ[,,5], axes = F, col = two.colors(start = 'blue', middle =mid_col), zlim = c(-1,1))
+image(wQ[,,5] - nQ[,,5], axes = F, col = two.colors(start = 'blue', middle =mid_col), zlim = c(-1.4,1.4))
 
 # sixth row
 image(x = seq(0, 1.6, length.out = 256), z = t(t(seq(0, 1.6, length.out = 256))), col = tim.colors(256), xlab='', axes = F)
 axis(1, at = seq(0, 1.6, 0.2), cex.axis = 4, outer = T, col = NA)
 
-image(x = seq(-1, 1, length.out = 256), z = t(t(seq(-1, 1, length.out = 256))), col = two.colors(start = 'blue', middle = mid_col), xlab='', axes = F)
-axis(1, at = seq(-1, 1, 0.5), cex.axis = 4, outer = T, col = NA)
+image(x = seq(-1.4, 1.4, length.out = 256), z = t(t(seq(-1.4, 1.4, length.out = 256))), col = two.colors(start = 'blue', middle = mid_col), xlab='', axes = F)
+axis(1, at = c(-1.4, -0.6, 0, 0.6, 1.4), cex.axis = 4, outer = T, col = NA)
 
 
 dev.off()

@@ -26,7 +26,7 @@ finiteD <- function(r = 0.2375, deltaT = .000001, deltaX = .0025, uInit = uInit,
 	temp = dim(uInit)
 	nx = temp[1]
 	ny = temp[2]
-	uFut = matrix(c(0),nr = nx, nc = ny)
+	uFut = matrix(c(0), nr = nx, nc = ny)
 
 	for(k in 1 : nframes){
 	

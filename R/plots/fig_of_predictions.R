@@ -64,58 +64,96 @@ head(run)
 # Initialize the begin timestep
 begin = 50
 # With Q
-q <- bigD[,,begin] - bigD[,,(begin-1)]
-q <- q/100
+Q0 <- array(0, dim = dim(bigD[,,begin]))
+proj <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, number = 10,
+                timestep = (begin - 1), num = 1, r = 0.15, nframes = 5, Q = Q0)
+q <- (bigD[,,begin] - proj[,,1])/50
 wQ50 <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, 
               number = 10, timestep = begin, num = 10, 
               nframes = 20, Q = q, r = 0.15)
-wQ50 <- ifelse(wQ50 < 0.0, 0, wQ50)
-wQ50 <- ifelse(wQ50 > 1.6, 1.6, wQ50)
+
+
+
+# q <- bigD[,,begin] - bigD[,,(begin-1)]
+# q <- q/100
+# wQ50 <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, 
+#               number = 10, timestep = begin, num = 10, 
+#               nframes = 20, Q = q, r = 0.15)
+# wQ50 <- ifelse(wQ50 < 0.0, 0, wQ50)
+# wQ50 <- ifelse(wQ50 > 1.6, 1.6, wQ50)
 
 
 # Initialize the begin timestep
 begin = 51
 # With Q
-q <- bigD[,,begin] - bigD[,,(begin-1)]
-q <- q/100
+Q0 <- array(0, dim = dim(bigD[,,begin]))
+proj <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, number = 10,
+                timestep = (begin - 1), num = 1, r = 0.15, nframes = 5, Q = Q0)
+q <- (bigD[,,begin] - proj[,,1])/50
 wQ51 <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, 
                 number = 10, timestep = begin, num = 10, 
                 nframes = 20, Q = q, r = 0.15)
-wQ51 <- ifelse(wQ51 < 0.0, 0, wQ51)
-wQ51 <- ifelse(wQ51 > 1.6, 1.6, wQ51)
+# q <- bigD[,,begin] - bigD[,,(begin-1)]
+# q <- q/100
+# wQ51 <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, 
+#                 number = 10, timestep = begin, num = 10, 
+#                 nframes = 20, Q = q, r = 0.15)
+# wQ51 <- ifelse(wQ51 < 0.0, 0, wQ51)
+# wQ51 <- ifelse(wQ51 > 1.6, 1.6, wQ51)
 
 # Initialize the begin timestep
 begin = 52
 # With Q
-q <- bigD[,,begin] - bigD[,,(begin-1)]
-q <- q/100
+Q0 <- array(0, dim = dim(bigD[,,begin]))
+proj <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, number = 10,
+                timestep = (begin - 1), num = 1, r = 0.15, nframes = 5, Q = Q0)
+q <- (bigD[,,begin] - proj[,,1])/50
 wQ52 <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, 
                 number = 10, timestep = begin, num = 10, 
                 nframes = 20, Q = q, r = 0.15)
-wQ52 <- ifelse(wQ52 < 0.0, 0, wQ52)
-wQ52 <- ifelse(wQ52 > 1.6, 1.6, wQ52)
+# q <- bigD[,,begin] - bigD[,,(begin-1)]
+# q <- q/100
+# wQ52 <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, 
+#                 number = 10, timestep = begin, num = 10, 
+#                 nframes = 20, Q = q, r = 0.15)
+# wQ52 <- ifelse(wQ52 < 0.0, 0, wQ52)
+# wQ52 <- ifelse(wQ52 > 1.6, 1.6, wQ52)
 
 # Initialize the begin timestep
 begin = 53
 # With Q
-q <- bigD[,,begin] - bigD[,,(begin-1)]
-q <- q/100
+Q0 <- array(0, dim = dim(bigD[,,begin]))
+proj <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, number = 10,
+                timestep = (begin - 1), num = 1, r = 0.15, nframes = 5, Q = Q0)
+q <- (bigD[,,begin] - proj[,,1])/50
 wQ53 <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, 
                 number = 10, timestep = begin, num = 10, 
                 nframes = 20, Q = q, r = 0.15)
-wQ53 <- ifelse(wQ53 < 0.0, 0, wQ53)
-wQ53 <- ifelse(wQ53 > 1.6, 1.6, wQ53)
+# q <- bigD[,,begin] - bigD[,,(begin-1)]
+# q <- q/100
+# wQ53 <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, 
+#                 number = 10, timestep = begin, num = 10, 
+#                 nframes = 20, Q = q, r = 0.15)
+# wQ53 <- ifelse(wQ53 < 0.0, 0, wQ53)
+# wQ53 <- ifelse(wQ53 > 1.6, 1.6, wQ53)
 
 # Initialize the begin timestep
 begin = 54
 # With Q
-q <- bigD[,,begin] - bigD[,,(begin-1)]
-q <- q/100
+Q0 <- array(0, dim = dim(bigD[,,begin]))
+proj <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, number = 10,
+                timestep = (begin - 1), num = 1, r = 0.15, nframes = 5, Q = Q0)
+q <- (bigD[,,begin] - proj[,,1])/50
 wQ54 <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, 
                 number = 10, timestep = begin, num = 10, 
                 nframes = 20, Q = q, r = 0.15)
-wQ54 <- ifelse(wQ50 < 0.0, 0, wQ54)
-wQ54 <- ifelse(wQ50 > 1.6, 1.6, wQ54)
+# q <- bigD[,,begin] - bigD[,,(begin-1)]
+# q <- q/100
+# wQ54 <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, 
+#                 number = 10, timestep = begin, num = 10, 
+#                 nframes = 20, Q = q, r = 0.15)
+# wQ54 <- ifelse(wQ50 < 0.0, 0, wQ54)
+# wQ54 <- ifelse(wQ50 > 1.6, 1.6, wQ54)
 
 
 

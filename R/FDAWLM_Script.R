@@ -66,6 +66,22 @@ for(i in 1:71){
 
 # Linear Regression -------------------------------------------------------
 
+h = lm(Horizontal ~ order, data = run)
+v = lm(Vertical ~ order, data = run)
+plot(h$residuals ~ v$residuals)
+
+hres <- h$residuals
+hres <- (hres - mean(hres))/sd(hres)
+vres <- v$residuals
+vres <- (vres - mean(vres))/sd(vres)
+plot(hres ~ vres)
+
+cor.test(hres, vres, method=c("pearson", "kendall", "spearman"))
+cor.test(hres, vres, method=c("pearson"))
+cor.test(hres, vres, method=c("kendall"))
+cor.test(hres, vres, method=c("spearman"))
+
+
 # horizontal
 plot(run$Horizontal ~ run$order)
 

@@ -82,8 +82,6 @@ Q <- (bigD[,,begin] - bigD[,,(begin-1)])/100
 sampsNQ <- nowcast(bigD = bigD, tolerance = 0, iteration = 10, number = 10, 
                    timestep = begin, num = 10, r = 0.24, nframes = 20, Q = Q) 
 
-
-
 for(i in 1 : 10){
   timestep = begin + i
   compNQ[i,1] = i + begin                                      # the image i am attempting to predict
